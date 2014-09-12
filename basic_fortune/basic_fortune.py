@@ -19,6 +19,9 @@ def fortune():
    """
    username = raw_input('what is your name?')
    fortuner = ['you will soon get a big surprise', 'happiness will soon find you', 'things are looking up', 'a wish that you made in the past is about to come true', 'you will be greeted with a gift in the near future', 'the sky will fall on you tomorrow']
+
+   # If len(fortuner) > len(username), randomize output to be a multiple of the len(username)
+
    print username + ", " + fortuner[(len(username)-1)%len(fortuner)]
 
 fortune()
