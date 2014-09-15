@@ -11,13 +11,10 @@ y = int(raw_input("enter value for y: "));
 
 def compare():
 	if x > y:
-		print 1;
 		return 1;
 	if x == y:
-		print 0;
 		return 0;
 	if x < y:
-		print -1;
 		return -1;
 
-compare();
+print compare();
