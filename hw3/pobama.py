@@ -11,11 +11,13 @@ def search(query):
 
 	t = Twitter()
 	i = None
-	for j in range(3):
+	for j in range(1):
 		for tweet in t.search(query, start = i, count = 1):
-			print tweet
-			# print tweet.text
-			print 
+			# print tweet
+			print "author: " + tweet.author
+			print "text: " + tweet.text
+			print "date: " + tweet.date
+
 			i = tweet.id
 
 
