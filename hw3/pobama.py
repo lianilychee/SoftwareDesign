@@ -12,7 +12,7 @@ def search(query):
 	t = Twitter()
 	i = None
 	for j in range(3):
-		for tweet in t.search(query, start = i, count = 10):
+		for tweet in t.search(query, start = i, count = 1):
 			print tweet
 			# print tweet.text
 			print 
