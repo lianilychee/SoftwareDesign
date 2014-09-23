@@ -3,16 +3,34 @@
 
 import time
 
-def stream():
+query = str(raw_input("enter search query: "))
 
-	print "hello world"
+def search(query):
 
 	from pattern.web import Twitter
 
-	s = Twitter().stream('#fail')
-	for i in range(10):
-		time.sleep(1) 
-		s.update(bytes=1024)
-		print s[-1].text if s else ''
+	t = Twitter()
+	i = None
+	for j in range(3):
+		for tweet in t.search(query, start = i, count = 10):
+			print tweet
+			# print tweet.text
+			print 
+			i = tweet.id
 
-stream()
+
+search(query);
+
+
+# def stream():
+# 	print "hello world"
+
+# 	from pattern.web import Twitter
+
+# 	s = Twitter().stream('#fail')
+# 	for i in range(10):
+# 		time.sleep(1) 
+# 		s.update(bytes=1024)
+# 		print s[-1].text if s else ''
+
+# stream()
