@@ -10,8 +10,9 @@ import codecs
 from pattern.web import Twitter
 from indicoio import sentiment as sent
 
-time = datetime.datetime.now()
-fileSave = codecs.open( str(time) +'.txt','w','utf-8' )
+time = str(datetime.datetime.now())
+timeClipped = time[0:19]
+fileSave = codecs.open( str(timeClipped) +'.txt','w','utf-8' )
 
 
 def search():
