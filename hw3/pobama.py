@@ -22,13 +22,13 @@ def search():
 
 	t = Twitter()
 	i = None
+	fileSave.write(query + "\n")
 	for j in range(1):
 		for tweet in t.search(query, start = i, count = 10):
-			# print "text: " + tweet.text
+			print "text: " + tweet.text
+			saveSent = str(sent(tweet.text)) + "\n"
+			print saveSent
 
-			test = str(sent(tweet.text)) + "\n"
-			print test
-
-			fileSave.write(test)
+			fileSave.write(saveSent)
 
 search()
