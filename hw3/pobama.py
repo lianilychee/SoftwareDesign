@@ -49,27 +49,31 @@ def search():
 	fileSave.write(query + "\n")
 
 	for j in range(1):
-		for tweet in t.search(query, start = i, count = 3):
+		allChances = 0
+		for tweet in t.search(query, start = i, count = 10):
 			
 			print tweet.text
 
 			# Calc tweet sentiment
 			sent_int = sent(tweet.text)
 			sent_str = str(sent_int)
-			print sent_str
+			# print sent_str
 
 			# Calc author's follower count
 			follows_int = findFollows(tweet.author)
 			follows_str = str(sent_int)
-			print follows_str
+			# print follows_str
 
 			# Calc chances; make cumulative
-			chances = chances + follows_int * sent_int
+			chances = follows_int * sent_int
+			print str(chances) + "\n"
 
 			# File save
-			save = str(sent(tweet.text)) + "\n" + str(findFollows(author)) + "\n"
+			save = sent_str + "\n" + follows_str + "\n \n"
 			fileSave.write(save)
 
-			return chances
+			allChances = allChances + chances
+
+		print "OVERALL: " + str(allChances)
 
 search()
