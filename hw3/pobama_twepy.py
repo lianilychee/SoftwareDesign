@@ -18,13 +18,7 @@ def main():
 	except tweetpony.APIError as err:
 		print "Oh no! The user's profile could not be loaded. Twitter returned error #%i and said: %s" % (err.code, err.description)
 	else:
-		for key, value in user.iteritems():
-			if key in ['entities', 'json', 'status']:
-				continue
-			line = "%s " % key.replace("_", " ").capitalize()
-			line += "." * (50 - len(line)) + " "
-			line += unicode(value)
-			print line
+		print user.followers_count
 
 if __name__ == "__main__":
 	main()
