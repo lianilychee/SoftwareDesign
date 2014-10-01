@@ -33,7 +33,7 @@ def findFollows(author):
 	try:
 		user = api.get_user(screen_name = username)
 	except tweetpony.APIError as err:
-		print "Oh no! The user's profile could not be loaded. Twitter returned error #%i and said: %s" % (err.code, err.description)
+		print "Twitter returned error #%i: %s" % (err.code, err.description)
 	else:
 		follows = user.followers_count
 		return follows
