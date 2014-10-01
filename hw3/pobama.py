@@ -6,15 +6,18 @@
 
 import time
 import datetime
-import codecs
+# import codecs
 from pattern.web import Twitter
+from pattern.web import URL, plaintext
 from indicoio import sentiment as sent
 
-time = str(datetime.datetime.now())
-timeClipped = time[0:19]
-fileSave = codecs.open( str(timeClipped) +'.txt','w','utf-8' )
+# time = str(datetime.datetime.now())
+# timeClipped = time[0:19]
+# fileSave = codecs.open( str(timeClipped) +'.txt','w','utf-8' )
 
 
+
+#  Pull down tweets and generate sentiment.
 def search():
 
 	query = str(raw_input("enter search query: "))
@@ -22,13 +25,16 @@ def search():
 
 	t = Twitter()
 	i = None
-	fileSave.write(query + "\n")
+	# fileSave.write(query + "\n")
 	for j in range(1):
-		for tweet in t.search(query, start = i, count = 10):
-			print "text: " + tweet.text
+		for tweet in t.search(query, start = i, count = 1):
+			# print "text: " + tweet.text
 			saveSent = str(sent(tweet.text)) + "\n"
-			print saveSent
+			# print saveSent
 
-			fileSave.write(saveSent)
+			# fileSave.write(saveSent)
+
+			# print tweet.author
 
 search()
+followerCount()
