@@ -24,6 +24,9 @@ fileSave = codecs.open( str(timeClipped) +'.txt','w','utf-8' )
 
 # Pull down author follower count.
 def findFollows(author):
+	'''
+
+	'''
 	api = get_api()
 	if not api:
 		return
@@ -44,36 +47,37 @@ def search():
 
 	query = str(raw_input("enter search query: "))
 	t = Twitter()
-	i = None
+	# i = None
 	chances = 0
 	fileSave.write(query + "\n")
 
-	for j in range(1):
-		allChances = 0
-		for tweet in t.search(query, start = i, count = 10):
-			
-			print tweet.text
+	allChances = 0
+	for tweet in t.search(query, start = None, count = 5):
+		
+		print tweet.text
 
-			# Calc tweet sentiment
-			sent_int = sent(tweet.text)
-			sent_str = str(sent_int)
-			# print sent_str
+		# Calc tweet sentiment
+		sent_int = sent(tweet.text)
+		sent_str = str(sent_int)
+		# print sent_str
 
-			# Calc author's follower count
-			follows_int = findFollows(tweet.author)
-			follows_str = str(sent_int)
-			# print follows_str
+		# Calc author's follower count
+		follows_int = findFollows(tweet.author)
+		follows_str = str(sent_int)
+		# print follows_str
 
-			# Calc chances; make cumulative
-			chances = follows_int * sent_int
-			print str(chances) + "\n"
+		# Calc chances; make cumulative
+		chances = follows_int * sent_int
+		print str(chances) + "\n"
 
-			# File save
-			save = sent_str + "\n" + follows_str + "\n \n"
-			fileSave.write(save)
+		# File save
+		save = sent_str + "\n" + follows_str + "\n \n"
+		fileSave.write(save)
 
-			allChances = allChances + chances
+		allChances = allChances + chances
 
 		print "OVERALL: " + str(allChances)
 
-search()
+if __name__ == "__main__":
+	search()
+# print __name__
