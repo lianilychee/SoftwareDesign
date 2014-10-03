@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 """
 Random_art.py
-
 @author: amonmillner, adapted from pruvolo work
 """
 
 # you do not have to use these particular modules, but they may help
 from random import randint
 import Image
+
+min_depth = int(raw_input("min_depth: "))   # min amt of nesting
+max_depth = int(raw_input("max_depth: "))   # max amt of nesting
+a = int(raw_input("a: "))   # 1st input for build_random_function()
+b = int(raw_input("b: "))   # 2nd input for build_random_function() 
 
 def build_random_function(min_depth, max_depth):
     """ your doc string goes here
