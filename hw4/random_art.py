@@ -15,16 +15,15 @@ import Image
 # b = int(raw_input("b: "))   # 2nd input for build_random_function()
 
 
-def build_random_function(min_depth, max_depth):
-	"""
-	Takes inputs recursion parameters min_depth, max_depth to generate random function.
+def build_rand_func(min_depth, max_depth):
+	""" Takes inputs recursion parameters min_depth, max_depth to generate random function.
 	"""
 
-	options = [['prod'],['sin_pi'],['cos_pi'],['a'],['b']]
+	options = [['prod'],['sin_pi'],['cos_pi'],['A'],['B']]
 
 	# base case
 	if max_depth == 1:
-		return ['a']
+		return ['A']
 
 	# if min_depth reached, also choose base case
 	elif min_depth <= 1:
@@ -36,7 +35,7 @@ def build_random_function(min_depth, max_depth):
 			return func_choice + [build_rand_func(min_depth-1, max_depth-1), build_rand_func(min_depth, max_depth)]
 
 		# if base case reached, end recursion
-		elif func_choice == ['a'] or func_choice == ['b']:
+		elif func_choice == ['A'] or func_choice == ['B']:
 			return func_choice
 
 		# otherwise, recurse as usual (single input)
@@ -58,11 +57,20 @@ def build_random_function(min_depth, max_depth):
 	# print rand_func
 	# return rand_func
 
-def evaluate_random_function(f, x, y):
-	""" your doc string goes here
+def eval_rand_func(f, a, b):
+	""" Pass in a list of strings that represent functions and solve in terms of inputted vals a and b
 	"""
 
-	# your code goes here
+    if f[0] == 'prod':
+        return eval_rand_func(f[1], x, y) * eval_rand_func(f[2], x, y)
+    elif f[0] == 'cos_pi':
+        return math.cos(math.pi * eval_rand_func(f[1], x, y))
+    elif f[0] == 'sin_pi':
+        return math.sin(math.pi * eval_rand_func(f[1], x, y))
+    elif f[0] == 'A':
+        return a
+    else:
+        return b  
 
 def remap_interval(val, input_interval_start, input_interval_end, output_interval_start, output_interval_end):
 	""" Maps the input value that is in the interval [input_interval_start, input_interval_end]
