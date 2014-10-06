@@ -82,40 +82,15 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
 		is an affine one (i.e. output = input*c + b).
 	"""
 
-	zero = (output_interval_start - input_interval_start)      #shifts the zero
-	change_factor = float(output_interval_end)/ (input_interval_end + zero) #stretches/compresses after shifting the end by above shift
-	new_value = (val+zero)*change_factor         #applies stretch/compression
+	# shift the zero
+	zero = (output_interval_start - input_interval_start)
+	
+	# stretch/compress after shifting
+	change_factor = float(output_interval_end)/ (input_interval_end + zero)
+
+	# apply stretching/compression
+	new_value = (val+zero)*change_factor
+
 	return new_value
 	
 	
-if __name__ == '__main__':
-	#function = build_random_function(3,5)
-   # value = evaluate_random_function(function, math.pi*6, math.pi*8)
-  #  print value
-	#print remap_interval(350,0, 350, -1, 1)   
-	
-	
-	img = Image.new('RGB', (350, 350))
-	pixels = img.load() # create the pixel map
-	
-	#generates random function for each color channel
-	funcR = build_rand_func(6,15) 
-	print funcR
-	funcG = build_rand_func(9,11)
-	print funcG
-	funcB = build_rand_func(5,12)
-	print funcB 
-
-	for i in range(img.size[0]):    # for every pixel:
-		for j in range(img.size[1]):
-			posX = remap_interval(i, 0, 350, -1,1) #scales rand func inputs to [-1,1]
-			posY = remap_interval(j, 0, 350, -1, 1)
-			rawR = eval_rand_func(funcR, posX, posY) #eval rand func
-			rawG = eval_rand_func(funcG, posX, posY)
-			rawB = eval_rand_func(funcB, posX, posY)
-			filterR = int(remap_interval(rawR, -1, 1, 0, 255))  #scale output to [0, 250]
-			filterG = int(remap_interval(rawG, -1, 1, 0, 255))
-			filterB = int(remap_interval(rawB, -1, 1, 0, 255))
-			pixels[i,j] = (filterR, filterG, filterB ) # set the colour accordingly
-	
-	img.show()
