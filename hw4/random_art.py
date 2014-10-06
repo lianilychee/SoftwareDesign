@@ -31,7 +31,7 @@ def build_rand_func(min_depth, max_depth):
 		func_choice = options[randint(0,4)] # choose random func
 
 		# allows products to take two imputs
-		if function_choice == ['prod']:
+		if func_choice == ['prod']:
 			return func_choice + [build_rand_func(min_depth-1, max_depth-1), build_rand_func(min_depth, max_depth)]
 
 		# if base case reached, end recursion
@@ -62,23 +62,18 @@ def eval_rand_func(f, a, b):
 	"""
 
 	if f[0] == 'prod':
-		print eval_rand_func(f[1], a, b) * eval_rand_func(f[2], a, b)
 		return eval_rand_func(f[1], a, b) * eval_rand_func(f[2], a, b)
 
 	elif f[0] == 'cos_pi':
-		print math.cos(math.pi * eval_rand_func(f[1], a, b))
 		return math.cos(math.pi * eval_rand_func(f[1], a, b))
 
 	elif f[0] == 'sin_pi':
-		print math.sin(math.pi * eval_rand_func(f[1], a, b))
 		return math.sin(math.pi * eval_rand_func(f[1], a, b))
 
 	elif f[0] == 'A':
-		print a
 		return a
 		
 	else:
-		print b
 		return b  
 
 def remap_interval(val, input_interval_start, input_interval_end, output_interval_start, output_interval_end):
@@ -86,8 +81,41 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
 		to the output interval [output_interval_start, output_interval_end].  The mapping
 		is an affine one (i.e. output = input*c + b).
 	"""
-	# your code goes here
+
+	zero = (output_interval_start - input_interval_start)      #shifts the zero
+	change_factor = float(output_interval_end)/ (input_interval_end + zero) #stretches/compresses after shifting the end by above shift
+	new_value = (val+zero)*change_factor         #applies stretch/compression
+	return new_value
 	
+	
+if __name__ == '__main__':
+	#function = build_random_function(3,5)
+   # value = evaluate_random_function(function, math.pi*6, math.pi*8)
+  #  print value
+	#print remap_interval(350,0, 350, -1, 1)   
+	
+	
+	img = Image.new('RGB', (350, 350))
+	pixels = img.load() # create the pixel map
+	
+	#generates random function for each color channel
+	funcR = build_rand_func(6,15) 
+	print funcR
+	funcG = build_rand_func(9,11)
+	print funcG
+	funcB = build_rand_func(5,12)
+	print funcB 
 
-
-#your additional code and functions go here
+	for i in range(img.size[0]):    # for every pixel:
+		for j in range(img.size[1]):
+			posX = remap_interval(i, 0, 350, -1,1) #scales rand func inputs to [-1,1]
+			posY = remap_interval(j, 0, 350, -1, 1)
+			rawR = eval_rand_func(funcR, posX, posY) #eval rand func
+			rawG = eval_rand_func(funcG, posX, posY)
+			rawB = eval_rand_func(funcB, posX, posY)
+			filterR = int(remap_interval(rawR, -1, 1, 0, 255))  #scale output to [0, 250]
+			filterG = int(remap_interval(rawG, -1, 1, 0, 255))
+			filterB = int(remap_interval(rawB, -1, 1, 0, 255))
+			pixels[i,j] = (filterR, filterG, filterB ) # set the colour accordingly
+	
+	img.show()
