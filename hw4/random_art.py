@@ -61,16 +61,25 @@ def eval_rand_func(f, a, b):
 	""" Pass in a list of strings that represent functions and solve in terms of inputted vals a and b
 	"""
 
-    if f[0] == 'prod':
-        return eval_rand_func(f[1], a, b) * eval_rand_func(f[2], a, b)
-    elif f[0] == 'cos_pi':
-        return math.cos(math.pi * eval_rand_func(f[1], a, b))
-    elif f[0] == 'sin_pi':
-        return math.sin(math.pi * eval_rand_func(f[1], a, b))
-    elif f[0] == 'A':
-        return a
-    else:
-        return b  
+	if f[0] == 'prod':
+		print eval_rand_func(f[1], a, b) * eval_rand_func(f[2], a, b)
+		return eval_rand_func(f[1], a, b) * eval_rand_func(f[2], a, b)
+
+	elif f[0] == 'cos_pi':
+		print math.cos(math.pi * eval_rand_func(f[1], a, b))
+		return math.cos(math.pi * eval_rand_func(f[1], a, b))
+
+	elif f[0] == 'sin_pi':
+		print math.sin(math.pi * eval_rand_func(f[1], a, b))
+		return math.sin(math.pi * eval_rand_func(f[1], a, b))
+
+	elif f[0] == 'A':
+		print a
+		return a
+		
+	else:
+		print b
+		return b  
 
 def remap_interval(val, input_interval_start, input_interval_end, output_interval_start, output_interval_end):
 	""" Maps the input value that is in the interval [input_interval_start, input_interval_end]
