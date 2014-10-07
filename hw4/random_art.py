@@ -107,11 +107,11 @@ if __name__ == '__main__':
 	# generates random function for each color channel
 
 	funcR = build_rand_func(6,15) 
-	print "funcR" + str(funcR) + "\n"
+	# print "funcR" + str(funcR) + "\n"
 	funcG = build_rand_func(9,11)
-	print "funcG" + str(funcG) + "\n"
+	# print "funcG" + str(funcG) + "\n"
 	funcB = build_rand_func(5,12)
-	print "funcB" + str(funcB) + "\n"
+	# print "funcB" + str(funcB) + "\n"
 
 	for i in range(img.size[0]):    # for every pixel:
 		for j in range(img.size[1]):
