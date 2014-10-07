@@ -4,20 +4,10 @@ Random_art.py
 @author: lianilye, adapted from amonmillner's work (originally pruvolo)
 """
 
-# you do not have to use these particular modules, but they may help
 from random import randint
 import math
 from PIL import Image
-import time
-import datetime
 
-# min_depth = int(raw_input("min_depth: "))   # min amt of nesting
-# max_depth = int(raw_input("max_depth: "))   # max amt of nesting
-# a = int(raw_input("a: "))   # 1st input for build_random_function()
-# b = int(raw_input("b: "))   # 2nd input for build_random_function()
-
-time = str(datetime.datetime.now())
-timeClipped = time[0:19]
 
 def build_rand_func(min_depth, max_depth):
 	""" Takes inputs recursion parameters min_depth, max_depth to generate random function.
@@ -125,4 +115,4 @@ if __name__ == '__main__':
 			filterB = int(remap_interval(rawB, -1, 1, 0, 255))
 			pixels[i,j] = (filterR, filterG, filterB ) # set the color accordingly
 	
-	img.save(timeClipped + ".jpg")
+	img.save("examplen.jpg")
