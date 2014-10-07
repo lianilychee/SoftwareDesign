@@ -7,13 +7,17 @@ Random_art.py
 # you do not have to use these particular modules, but they may help
 from random import randint
 import math
-import Image
+from PIL import Image
+import time
+import datetime
 
 # min_depth = int(raw_input("min_depth: "))   # min amt of nesting
 # max_depth = int(raw_input("max_depth: "))   # max amt of nesting
 # a = int(raw_input("a: "))   # 1st input for build_random_function()
 # b = int(raw_input("b: "))   # 2nd input for build_random_function()
 
+time = str(datetime.datetime.now())
+timeClipped = time[0:19]
 
 def build_rand_func(min_depth, max_depth):
 	""" Takes inputs recursion parameters min_depth, max_depth to generate random function.
@@ -93,4 +97,32 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
 
 	return new_value
 	
+
 	
+if __name__ == '__main__':
+	
+	img = Image.new('RGB', (350, 350))
+	pixels = img.load() # create the pixel map
+	
+	# generates random function for each color channel
+
+	funcR = build_rand_func(6,15) 
+	print "funcR" + str(funcR) + "\n"
+	funcG = build_rand_func(9,11)
+	print "funcG" + str(funcG) + "\n"
+	funcB = build_rand_func(5,12)
+	print "funcB" + str(funcB) + "\n"
+
+	for i in range(img.size[0]):    # for every pixel:
+		for j in range(img.size[1]):
+			posX = remap_interval(i, 0, 350, -1,1) #scales rand func inputs to [-1,1]
+			posY = remap_interval(j, 0, 350, -1, 1)
+			rawR = eval_rand_func(funcR, posX, posY) #eval rand func
+			rawG = eval_rand_func(funcG, posX, posY)
+			rawB = eval_rand_func(funcB, posX, posY)
+			filterR = int(remap_interval(rawR, -1, 1, 0, 255))  #scale output to [0, 250]
+			filterG = int(remap_interval(rawG, -1, 1, 0, 255))
+			filterB = int(remap_interval(rawB, -1, 1, 0, 255))
+			pixels[i,j] = (filterR, filterG, filterB ) # set the color accordingly
+	
+	img.save(timeClipped + ".jpg")
