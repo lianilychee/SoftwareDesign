@@ -1,17 +1,11 @@
 """
+This program is part of an exercise in Think Python: An Introduction to Software Design by Allen B. Downey
 
-This program is part of an exercise in
-Think Python: An Introduction to Software Design
-Allen B. Downey
-
-WARNING: this program contains a NASTY bug.  I put
-it there on purpose as a debugging exercise, but
-you DO NOT want to emulate this example!
-
+WARNING: this program contains a NASTY bug.  I put it there on purpose as a debugging exercise, but you DO NOT want to emulate this example!
 """
 
 class Kangaroo(object):
-    """a Kangaroo is a marsupial"""
+    """Kangaroo is a marsupial"""
     
     def __init__(self, contents=[]):
         """initialize the pouch contents; the default value is
@@ -31,12 +25,17 @@ class Kangaroo(object):
         """add a new item to the pouch contents"""
         self.pouch_contents.append(item)
 
-kanga = Kangaroo()
-roo = Kangaroo()
+kanga = Kangaroo([])
+roo = Kangaroo([])
 kanga.put_in_pouch('wallet')
 kanga.put_in_pouch('car keys')
 kanga.put_in_pouch(roo)
 
+print "\n"
+print "ROO"
+print roo
+print "\n"
+print "KANGA"
 print kanga
 
 # If you run this program as is, it seems to work.
